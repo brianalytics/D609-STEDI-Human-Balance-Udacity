@@ -27,4 +27,4 @@ jobs:
         # run: aws s3 sync s3://${{ secrets.MY_BUCKET }}/ ./data
 
       - name: Upload to S3
-        run: aws s3 sync ${{ secrets.DATA_PATH }} s3://${{ secrets.MY_BUCKET }}/
+        run: aws s3 sync ./project/data s3://${{ secrets.MY_BUCKET }}/
