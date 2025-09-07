@@ -2,7 +2,7 @@ name: S3 Sync via OIDC
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 jobs:
