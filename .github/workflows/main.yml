@@ -24,7 +24,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Download from S3
-        run: aws s3 sync s3://{MY_BUCKET}/data ./data-from-s3
+        run: aws s3 sync s3://${{ secrets.MY_BUCKET }}/data ./data-from-s3
 
       - name: Upload to S3
-        run: aws s3 sync ./data-to-s3 s3://{MY_BUCKET}/upload
+        run: aws s3 sync ./data-to-s3 s3://${{ secrets.MY_BUCKET }}/upload
