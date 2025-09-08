@@ -11,7 +11,7 @@ jobs:
 
     permissions:
       id-token: write
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout
@@ -26,5 +26,15 @@ jobs:
       - name: Download from S3
         run: aws s3 sync s3://${{ secrets.MY_BUCKET }}/ ./project/data
 
-      # - name: Upload to S3
-        # run: aws s3 sync ./project/data s3://${{ secrets.MY_BUCKET }}/
+      - name: Configure Git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit and push changes
+        run: |
+          git add project/data
+          if ! git diff --cached --quiet; then
+            git commit -m "Update data from S3"
+            git push
+          fi
